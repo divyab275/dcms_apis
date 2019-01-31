@@ -6,7 +6,7 @@
 
 var app = require('../app');
 var debug = require('debug')('dcms-node:server');
-// var http = require('http');
+var http = require('http');
 var https = require('https');
 var models = require('../models');
 
@@ -16,23 +16,23 @@ var fs = require('fs')
  * Get port from environment and store in Express.
  */
 
-var port = normalizePort(process.env.PORT || '3000');
+var port = normalizePort('3000');
 app.set('port', port);
 
 /**
  * Create HTTP server.
  */
 
-// var server = http.createServer(app);
+var server = http.createServer(app);
 
-var server = https.createServer({ key: fs.readFileSync('./bin/ca.key'),
- cert: fs.readFileSync('./bin/ca.crt') }, app)
+// var server = https.createServer({ key: fs.readFileSync('./bin/ca.key'),
+//  cert: fs.readFileSync('./bin/ca.crt') }, app)
 
 /**
  * Listen on provided port, on all network interfaces.
  */
 
-models.sequelize.sync({}).then(function() {
+models.sequelize.sync().then(function() {
     /**
      * Listen on provided port, on all network interfaces.
      */
@@ -100,4 +100,5 @@ function onListening() {
         'pipe ' + addr :
         'port ' + addr.port;
     debug('Listening on ' + bind);
+    console.log(port)
 }

@@ -14,6 +14,8 @@ var debug = require('debug')('app');
 var app = express();
 
 var serviceAccount = require("./dcms-admin.json");
+console.log("hello");
+
 
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccount),
