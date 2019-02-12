@@ -23,7 +23,8 @@
     "pug": "~2.0.0-beta6",
     "sequelize": "^3.30.0",
     "serve-favicon": "^2.5.0",
-    "underscore": "^1.8.3"
+    "underscore": "^1.8.3",
+    "uuid": "^3.3.2"
   },
   "devDependencies": {
     "apidoc": "^0.17.5",

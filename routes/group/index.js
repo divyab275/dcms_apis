@@ -5,10 +5,8 @@ router.get('/', function(req, res, next) {
     res.send('Welcome!');
 });
 
-router.use('/dcms-admin', require('./admin'))
-router.use('/student', require('./student'))
-router.use('/public', require('./public'))
-router.use('/group', require('./group'))
+router.use('/reunion', require('./reunion'))
+
 
 
 module.exports = router;

@@ -6,6 +6,7 @@
 module.exports = function(sequelize, DataTypes) {
     var Reunion = sequelize.define("reunion", {
         name: DataTypes.STRING,
+        description: DataTypes.TEXT,
         gid: {
             //Generate this
             type: DataTypes.STRING,
@@ -13,8 +14,8 @@ module.exports = function(sequelize, DataTypes) {
             unique: true
         },
         creatorID: {
-            type: DataTypes.DECIMAL,
-            defaultValue: 0
+            type: DataTypes.STRING,
+            //defaultValue: 0
         }
     },{
         classMethods: {

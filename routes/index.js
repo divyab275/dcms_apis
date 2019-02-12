@@ -8,5 +8,5 @@ router.get('/', function(req, res, next) {
 router.use('/dcms-admin', require('./admin'))
 router.use('/student', require('./student'))
 router.use('/public', require('./public'))
-
+router.use('/group',require('./group'))
 module.exports = router;
