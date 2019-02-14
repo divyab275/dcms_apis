@@ -9,17 +9,69 @@ var uuid = require("uuid");
 router.post('/', (req, res, next) => {
     let info ={}
     info.gid = uuid();
-    info.name = req.body.name;
-    info.creatorID = 10;
-    info.desciption = req.body.description;
+    info.name = req.body.group;
+    info.creatorID = req.body.uid;
+    info.description = req.body.description;
     console.log(info);
+    data={}
     models.reunion.create(info)
         .then(result => {
-            return res.json(result);
-        }).catch(error => {
+            console.log(result)
+            var creator={}
+            creator.gid = result.gid
+            creator.uid = result.creatorID
+            data.gid = result.gid
+            models.studentReunion.create(creator)
+            
+        }).then(response=>{
+            return res.json(data);
+        })
+        .catch(error => {
             console.log(error)
             //constant.cantPutReunion.data = error;
             //return res.status(400).json(constant.cantPutReunion);
         })
 });
+
+
+// router.post('/creategroup',(req,res)=>{
+//     if(req.token!=null)//use underscore
+
+// })
+
+router.get('/:groupid',(req,res)=>{
+    models.reunion.findAll({
+        where: {
+            gid: req.params.groupid
+        }
+    })
+    .then(resp=>{
+        res.send(resp)
+    })
+    .catch(err=>{
+        res.send(err)
+    })
+})
+
+router.get('/',(req,res)=>{
+    res.send("Hello");
+})
+
+router.get('/:groupid',(req,res)=>{
+    models.reunion.findAll({
+        where:{
+            gid:groupid
+        }
+    })
+    .then(resp=>{
+        console.log("ivide keri")
+        res.json(resp)
+    })
+    .catch(err=>{
+        console.log("erorrr")
+
+        res.send(err);
+    })
+})
+
 module.exports = router;

@@ -9,14 +9,16 @@ module.exports = function(sequelize, DataTypes) {
             type: DataTypes.STRING,
             allowNull: false,
         },
-        studentID: {
-            type: DataTypes.STRING
+        uid:{
+            type:DataTypes.STRING
         }
-    },{
+    },
+     {
         classMethods: {
             associate: function(models) {
-                models.studentReunion.belongsTo(models.student,{foreignKey:'studentID',targetKey:'uid'});
+                
                 models.studentReunion.belongsTo(models.reunion,{foreignKey:'gid',targetKey:'gid'});
+                models.studentReunion.belongsTo(models.student,{foreignKey:'uid',targetKey:'uid'})
             }
         }
 

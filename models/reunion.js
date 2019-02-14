@@ -17,14 +17,17 @@ module.exports = function(sequelize, DataTypes) {
             type: DataTypes.STRING,
             //defaultValue: 0
         }
-    },{
+    },
+    {
         classMethods: {
             associate: function(models) {
                 models.reunion.belongsTo(models.student,{foreignKey:'creatorID',targetKey:'uid'})
+                
             }
         }
 
-    });
+    }
+    );
 
     return Reunion;
 };
