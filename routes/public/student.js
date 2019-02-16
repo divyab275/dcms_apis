@@ -38,6 +38,8 @@ router.get('/:query', (req, res, next) => {
                 email: req.params.query
             }, {
                 phone: req.params.query
+            },{
+                uid: req.params.query
             }]
         }
     }).then(result => {

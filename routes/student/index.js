@@ -118,10 +118,10 @@ router.post('/register', (req, res, next) => {
     req.body.registered = true;
     Student.update(_.pick(req.body, 'phone', 'accomodation', 'collegeId', 'registered'), {
         where: {
-            uid: req.uid
+            uid: req.body.uid
         }
     }).then(result => {
-        res.json("Registered");
+        res.send(result)
     }).catch(error => {
         res.status(400).json(constant.registerFailed);
     });

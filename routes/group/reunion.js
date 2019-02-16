@@ -74,4 +74,40 @@ router.get('/:groupid',(req,res)=>{
     })
 })
 
+router.post('/addStudentReunion',(req,res)=>{
+    var data = {}
+    data.groupid = req.body.gid;
+    data.uid = req.body.uid;
+    models.studentReunion.create(data)
+    .then(resp=>{
+        res.send(resp)
+    })
+    .catch(err=>{
+        res.send(err)
+    })
+})
+
+router.post('/name',(req,res,next)=>{
+    var userid = req.body.uid
+    var gid  = req.body.groupid
+    console.log(userid)
+    console.log(gid)
+    models.studentReunion.findAll({
+        where:{
+            gid : gid,
+            uid : userid
+        }
+    })
+    .then(response=>{
+        res.send(response)
+    })
+    .catch(err=>{
+        console.log(err)
+    })
+}
+
+)
+
+
+
 module.exports = router;
