@@ -168,4 +168,6 @@ router.post('/updateGuntScore', (req, res, next) => {
             });
     });
 });
+
+
 module.exports = router;

@@ -6,6 +6,23 @@ var fcm = require('../fcm');
 var Promise = require('bluebird');
 var _ = require('underscore');
 var uuid = require("uuid");
+
+router.post('/findAll',(req,res)=>{
+    var gid = req.body.gid;
+    models.studentReunion.findAll({
+        where:{
+            gid:gid
+        }
+    })
+    .then(result=>{
+        console.log(res)
+        res.send(result)
+    })
+    .catch(err=>{
+        res.send(err)
+    })
+})
+
 router.post('/', (req, res, next) => {
     let info ={}
     info.gid = uuid();
@@ -54,7 +71,7 @@ router.get('/:groupid',(req,res)=>{
 })
 
 router.get('/',(req,res)=>{
-    res.send("Hello");
+    res.send("Hello")
 })
 
 router.get('/:groupid',(req,res)=>{

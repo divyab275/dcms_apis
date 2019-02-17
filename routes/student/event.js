@@ -271,6 +271,7 @@ router.get('/:id', (req, res, next) => {
 ]
  */
 router.get('/', (req, res, next) => {
+    console.log(req.student.id)
     var getGroupStudent = models.groupStudent.findAll({
         where: {
             studentId: req.student.id

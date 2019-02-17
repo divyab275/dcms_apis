@@ -10,7 +10,7 @@ var constant = require('../constant.js');
  * 
  */
 module.exports = function(req, res, next) {
-    console.log(req.body)
+    // console.log(req.body)
     idToken = req.body.idToken || req.headers['x-auth-token'] || "";
     if (req.url.startsWith('/group'))
         return next()

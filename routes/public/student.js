@@ -3,6 +3,7 @@ var debug = require('debug')('public');
 var models = require('../../models');
 var constant = require('../../constant');
 var _ = require('underscore');
+const Op = models.Sequelize.Op;
 /**
  * @api {get} /public/student/:query get student Details
  * @apiDescription get the details of student using either phone number or email
@@ -30,6 +31,27 @@ var _ = require('underscore');
 {"code":15,"message":"Could not find student"}
  * 
  */
+router.post('/details',(req,res,next)=>{
+    // var arr = req.body.arr;
+    // console.log(models.Sequelize.or)
+    // res.se   "hello")
+    console.log(Op.any)
+    models.student.findAll({
+        where:{
+            uid:{
+                [Op.any] : arr
+            }
+        }
+    })
+    .then(res=>{
+        console.log(res)
+    })
+    .catch(err=>{
+        console.log(err)
+    })
+})
+
+
 router.get('/:query', (req, res, next) => {
     console.log(req.params.query)
     models.student.findOne({
