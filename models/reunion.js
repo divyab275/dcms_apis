@@ -22,7 +22,7 @@ module.exports = function(sequelize, DataTypes) {
         classMethods: {
             associate: function(models) {
                 models.reunion.belongsTo(models.student,{foreignKey:'creatorID',targetKey:'uid'})
-                
+               // models.reunion.belongsTo(models.studentReunion,{foreignKey:'gid',targetKey:'gid'})
             }
         }
 

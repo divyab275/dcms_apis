@@ -10,11 +10,12 @@ var constant = require('../constant.js');
  * 
  */
 module.exports = function(req, res, next) {
+    console.log(req.body)
     idToken = req.body.idToken || req.headers['x-auth-token'] || "";
     if (req.url.startsWith('/group'))
         return next()
-    if(req.url.startsWith('/student/register'))
-        return next()
+    // if(req.url.startsWith('/student/login'))
+    //     return next()
     if (req.url.startsWith('/dcms-admin/volunteer/registeredEvents'))
         return next()
     if (req.url.startsWith('/student/updateGuntScore')) {

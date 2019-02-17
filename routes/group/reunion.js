@@ -75,9 +75,11 @@ router.get('/:groupid',(req,res)=>{
 })
 
 router.post('/addStudentReunion',(req,res)=>{
+    console.log(req.body)
     var data = {}
-    data.groupid = req.body.gid;
+    data.gid = req.body.groupid;
     data.uid = req.body.uid;
+    console.log(data)
     models.studentReunion.create(data)
     .then(resp=>{
         res.send(resp)

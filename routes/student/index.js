@@ -52,13 +52,14 @@ router.use('/event/', require('./event.js'));
 router.post('/login', function(req, res, next) {
     debug(req.profile);
     debug(req.uid);
-
+    
     var student = req.profile;
     student.uid = req.uid;
     student.name = req.profile.name;
     student.email = req.profile.email;
     if (req.profile.picture)
         student.picture = req.profile.picture;
+    console.log(student)
     delete student.id;
     Student.findOne({
         where: {
@@ -116,11 +117,14 @@ router.post('/login', function(req, res, next) {
  */
 router.post('/register', (req, res, next) => {
     req.body.registered = true;
+    console.log(req.uid)
+    console.log(req.body)
     Student.update(_.pick(req.body, 'phone', 'accomodation', 'collegeId', 'registered'), {
         where: {
-            uid: req.body.uid
+            uid: req.uid
         }
     }).then(result => {
+        console.log(result)
         res.send(result)
     }).catch(error => {
         res.status(400).json(constant.registerFailed);
