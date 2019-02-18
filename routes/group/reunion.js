@@ -7,6 +7,50 @@ var Promise = require('bluebird');
 var _ = require('underscore');
 var uuid = require("uuid");
 
+
+router.post('/studentDetails', (req, res, next) => {
+    // console.log(req.student.id)
+    console.log(req.body)
+    var getReunionStudent = models.studentReunion.findAll({
+        where: {
+            gid: req.body.gid
+        }
+    });
+    // var getEventStudent = models.eventStudent.findAll({
+    //     where: {
+    //         studentId: req.student.id
+    //     }
+    // });
+    try {
+        Promise.all([getReunionStudent])
+            .spread((studentReunion) => {
+                studentIds = studentReunion.map(x => {
+                    return x.uid;
+                });
+                // eventIds = eventIds.concat(groupStudent.map(x => {
+                //     return x.eventId;
+                // }));
+                studentIds = Array.from(new Set(studentIds));
+                return models.student.findAll({
+                    where: {
+                        $or: [{
+                            uid: studentIds
+                        }]
+                    }
+                });
+            }).then(result => {
+                res.json(result);
+            }).catch(error => {
+                debug(error)
+                constant.cantfetchEvent.data = error;
+                res.status(400).json(constant.cantfetchEvent);
+            });
+    } catch (error) {
+        debug(error);
+    }
+});
+
+
 router.post('/findAll',(req,res)=>{
     var gid = req.body.gid;
     models.studentReunion.findAll({
